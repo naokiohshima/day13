@@ -1,5 +1,5 @@
 class PoemsController < ApplicationController
-  before_action :set_poem, only: [:show, :edit, :destroy]
+  before_action :set_poem, only: [:show, :edit, :destroy, :update]
 
   # GET /poems
   # GET /poems.json
@@ -54,6 +54,7 @@ class PoemsController < ApplicationController
   # DELETE /poems/1
   # DELETE /poems/1.json
   def destroy
+    @poem = Poem.find(params[:id])
     @poem.destroy
     respond_to do |format|
       format.html { redirect_to poems_url, notice: 'Poem was successfully destroyed.' }
@@ -69,6 +70,6 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      params.require(:poem).permit(:content, :auther)
+      params.require(:poem).permit(:title, :content, :auther)
     end
 end
